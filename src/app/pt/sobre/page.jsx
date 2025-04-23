@@ -9,12 +9,11 @@ export default function Sobre() {
       <h1 className="text-3xl font-bold mb-6">Sobre Mim</h1>
 
       <div className="flex flex-col md:flex-row items-center gap-6">
-        <div className="shadow-md rounded-md overflow-hidden">
+        <div className="w-96 h-48 relative shadow-md rounded-md overflow-hidden">
           <Image
             src={perfil}
             alt="Foto de Angelino"
-            width={192}
-            height={192}
+            fill
             className="object-cover"
           />
         </div>

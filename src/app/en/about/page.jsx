@@ -9,12 +9,11 @@ export default function About() {
       <h1 className="text-3xl font-bold mb-6">About Me</h1>
 
       <div className="flex flex-col md:flex-row items-center gap-6">
-        <div className="shadow-md rounded-md overflow-hidden">
+        <div className="w-96 h-48 relative shadow-md rounded-md overflow-hidden">
           <Image
             src={perfil}
             alt="Angelino's photo"
-            width={192}
-            height={192}
+            fill
             className="object-cover"
           />
         </div>
