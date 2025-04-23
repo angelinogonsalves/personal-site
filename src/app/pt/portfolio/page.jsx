@@ -3,25 +3,6 @@
 export default function Portfolio() {
   const projetos = [
     {
-      nome: 'BlockStay',
-      descricao: 'Sistema de reserva de hospedagem com emissão de NFT como comprovante.',
-      tecnologias: 'Solidity, React, ethers.js, IPFS',
-      github: 'https://github.com/angelinogonsalves/hackNearx-BlockStay'
-    },
-    {
-      nome: 'LegalMatch',
-      descricao: 'Desafio de matchmaking jurídico com afinidade entre perfis.',
-      tecnologias: 'MongoDB, Vite, React, Vercel',
-      github: 'https://github.com/angelinogonsalves/Desafio_DEV_LEGALAI_Angelino_Gonsalves',
-      demo: 'https://desafio-dev-legalai-angelino-gonsalves.vercel.app/'
-    },
-    {
-      nome: 'Gestão Fotografia',
-      descricao: 'Sistema para organização de fotos, orçamentos personalizados e envio ao cliente.',
-      tecnologias: 'Laravel, MySQL, jQuery, Bootstrap',
-      print: true
-    },
-    {
       nome: 'Gestão Frota',
       descricao: 'Sistema de controle de veículos, abastecimento e manutenção para empresas.',
       tecnologias: 'Laravel, SQL Server, Power BI',
@@ -46,10 +27,36 @@ export default function Portfolio() {
       ]
     },
     {
+      nome: 'Gestão Fotografia',
+      descricao: 'Sistema para organização de fotos, orçamentos personalizados e envio ao cliente.',
+      tecnologias: 'Laravel, MySQL, jQuery, Bootstrap',
+      print: true
+    },
+    {
       nome: 'Gestão Água',
       descricao: 'Solução para comunidades gerenciarem consumo, tarifas e relatórios de abastecimento.',
       tecnologias: 'Laravel, MySQL, Multi-tenant',
       print: true
+    },
+    {
+      nome: 'BlockStay',
+      descricao: 'Desafio Hackaton: Sistema de reserva de hospedagem com emissão de NFT como comprovante.',
+      tecnologias: 'Solidity, React, ethers.js, IPFS',
+      github: 'https://github.com/angelinogonsalves/hackNearx-BlockStay'
+    },
+    {
+      nome: 'Kuverse MVP',
+      descricao: 'Desafio: Desenvolvimento de smart contract ERC-721 com login via carteira (Web3).',
+      tecnologias: 'Solidity, Hardhat, ethers.js, MetaMask, React',
+      github: 'https://github.com/angelinogonsalves/kuverse-mvp',
+      video: 'https://www.loom.com/share/075c88ed34a1423685b42e2f4bf57bb4?sid=0e33612f-8a0f-44a1-bdb4-c514e2bc5924'
+    },
+    {
+      nome: 'LegalMatch',
+      descricao: 'Desafio: Matchmaking de afinidade entre perfis.',
+      tecnologias: 'MongoDB, Vite, React, Vercel',
+      github: 'https://github.com/angelinogonsalves/Desafio_DEV_LEGALAI_Angelino_Gonsalves',
+      demo: 'https://desafio-dev-legalai-angelino-gonsalves.vercel.app/'
     }
   ];
 
@@ -85,6 +92,16 @@ export default function Portfolio() {
                   className="text-green-600 underline hover:text-green-800 dark:text-green-400"
                 >
                   Visualizar Online
+                </a>
+              )}
+              {proj.video && (
+                <a
+                  href={proj.video}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-purple-600 underline hover:text-purple-800 dark:text-purple-400"
+                >
+                  Ver Apresentação
                 </a>
               )}
               {proj.print && (
