@@ -11,7 +11,7 @@ export default function Apropos() {
       <div className="flex flex-col md:flex-row items-center gap-6">
         <div className="shadow-md rounded-md overflow-hidden">
           <Image
-            src={perfil}
+            src={profil}
             alt="Photo de Angelino"
             width={192}
             height={192}
