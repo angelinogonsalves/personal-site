@@ -9,12 +9,13 @@ export default function Apropos() {
       <h1 className="text-3xl font-bold mb-6">À propos de moi</h1>
 
       <div className="flex flex-col md:flex-row items-center gap-6">
-        <div className="w-48 h-48 relative rounded-full overflow-hidden shadow-md">
+        <div className="shadow-md rounded-md overflow-hidden">
           <Image
-            src={profil}
+            src={perfil}
             alt="Photo de Angelino"
-            fill
-            style={{ objectFit: 'cover' }}
+            width={192}
+            height={192}
+            className="object-cover"
           />
         </div>
 

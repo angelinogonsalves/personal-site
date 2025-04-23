@@ -1,32 +1,56 @@
 'use client';
 
-export default function PortfolioEn() {
+export default function Portfolio() {
   const projects = [
     {
-      name: 'Kadosh BlockStay',
-      description: 'A decentralized platform for booking stays using NFTs as proof of reservation.',
-      tech: 'Solidity, React, ethers.js, IPFS',
+      name: 'BlockStay',
+      description: 'Hotel booking system with NFT issuance as proof of reservation.',
+      technologies: 'Solidity, React, ethers.js, IPFS',
+      github: 'https://github.com/angelinogonsalves/hackNearx-BlockStay'
     },
     {
-      name: 'Kadosh LegalMatch',
-      description: 'A legal matchmaking system based on user profiles and preferences.',
-      tech: 'MongoDB, Vite, React, Vercel',
+      name: 'LegalMatch',
+      description: 'Legal matchmaking challenge with profile affinity.',
+      technologies: 'MongoDB, Vite, React, Vercel',
+      github: 'https://github.com/angelinogonsalves/Desafio_DEV_LEGALAI_Angelino_Gonsalves',
+      demo: 'https://desafio-dev-legalai-angelinogonsalves.vercel.app/'
     },
     {
-      name: 'Kadosh PhotoManager',
-      description: 'Custom solution for managing photography sessions, quotes, and client galleries.',
-      tech: 'Laravel, MySQL, jQuery, Bootstrap',
+      name: 'PhotoManager',
+      description: 'System for organizing photos, sending personalized quotes and delivery to clients.',
+      technologies: 'Laravel, MySQL, jQuery, Bootstrap',
+      print: true
     },
     {
-      name: 'Kadosh FleetManager',
-      description: 'Fleet management system for tracking vehicles, fuel, maintenance, and reports.',
-      tech: 'Laravel, SQL Server, Power BI',
+      name: 'FleetManager',
+      description: 'Vehicle management system with fuel tracking and maintenance control.',
+      technologies: 'Laravel, SQL Server, Power BI',
+      github: 'https://github.com/angelinogonsalves/gestaofrota',
+      demo: 'https://gestaofrota.angelinogonsalves.com/',
+      logins: [
+        {
+          role: 'Fleet',
+          email: 'frota@gestaofrota.email',
+          password: '123456'
+        },
+        {
+          role: 'Finance',
+          email: 'financeiro@gestaofrota.email',
+          password: '123456'
+        },
+        {
+          role: 'Account Manager',
+          email: 'contas@gestaofrota.email',
+          password: '123456'
+        }
+      ]
     },
     {
-      name: 'Kadosh AquaCom',
-      description: 'Community water management with multi-user access, metering, billing, and reports.',
-      tech: 'Laravel, MySQL, Multi-tenant',
-    },
+      name: 'AquaCom',
+      description: 'Solution for communities to manage water consumption, tariffs, and reports.',
+      technologies: 'Laravel, MySQL, Multi-tenant',
+      print: true
+    }
   ];
 
   return (
@@ -39,8 +63,47 @@ export default function PortfolioEn() {
             <h2 className="text-xl font-semibold">{proj.name}</h2>
             <p className="mt-2">{proj.description}</p>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              <strong>Technologies:</strong> {proj.tech}
+              <strong>Technologies:</strong> {proj.technologies}
             </p>
+
+            <div className="mt-4 flex gap-4 flex-wrap">
+              {proj.github && (
+                <a
+                  href={proj.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-800 dark:text-blue-400"
+                >
+                  GitHub
+                </a>
+              )}
+              {proj.demo && (
+                <a
+                  href={proj.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-600 underline hover:text-green-800 dark:text-green-400"
+                >
+                  View Online
+                </a>
+              )}
+              {proj.print && (
+                <span className="text-gray-400 italic">Screenshots coming soon</span>
+              )}
+            </div>
+
+            {proj.logins && (
+              <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                <p className="font-semibold">Demo Logins:</p>
+                <ul className="list-disc ml-6 mt-1">
+                  {proj.logins.map((user, i) => (
+                    <li key={i}>
+                      <strong>{user.role}:</strong> {user.email} / {user.password}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
       </div>
