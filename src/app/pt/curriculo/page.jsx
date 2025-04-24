@@ -43,7 +43,7 @@ export default function Curriculo() {
 
       <div className="mt-6 text-center">
         <a
-          href="/CV_Angelino_Gonsalves_Dev.pdf"
+          href="/CV_Angelino_Gonsalves_BR.pdf"
           download
           className="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
