@@ -1,0 +1,90 @@
+<!-- Código HTML e JavaScript atualizado conforme solicitado por Angelino -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Batalhas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Registro de Batalhas</h1>
+        </header>
+
+        <main>
+            <h2 class="text-xl font-semibold mb-4">Times</h2>
+            <ul id="team-list" class="mb-8 space-y-2"></ul>
+
+            <h2 class="text-xl font-semibold mb-4">Histórico de Batalhas</h2>
+            <ul id="battle-list" class="space-y-4"></ul>
+        </main>
+    </div>
+
+    <script>
+        let teams = [
+            { id: 1, name: 'Fora do Tempo' },
+            { id: 2, name: 'Tropa Alfa' },
+            { id: 3, name: 'Os Invencíveis' },
+            { id: 4, name: 'Tempestade' }
+        ];
+
+        let battles = [
+            { id: 1, attackTeamId: 1, attackPower: 3350, defenseTeamId: 2, defensePower: 4123, result: 'Perdeu', date: '2023-05-15' },
+            { id: 2, attackTeamId: 3, attackPower: 4500, defenseTeamId: 4, defensePower: 3800, result: 'Venceu', date: '2023-05-20' },
+            { id: 3, attackTeamId: 2, attackPower: 5000, defenseTeamId: 1, defensePower: 4800, result: 'Venceu', date: '2023-06-01' }
+        ];
+
+        const teamList = document.getElementById('team-list');
+        const battleList = document.getElementById('battle-list');
+
+        function getTeamName(id) {
+            const team = teams.find(t => t.id === id);
+            return team ? team.name : 'Desconhecido';
+        }
+
+        function renderTeams() {
+            teamList.innerHTML = '';
+            teams.forEach(team => {
+                const li = document.createElement('li');
+                li.textContent = team.name;
+                li.className = "bg-white shadow rounded px-4 py-2";
+                teamList.appendChild(li);
+            });
+        }
+
+        function renderBattles() {
+            battleList.innerHTML = '';
+            battles.forEach(battle => {
+                const li = document.createElement('li');
+                li.className = "bg-white shadow rounded p-4";
+                li.innerHTML = `
+                    <div class="text-sm mb-2">${getTeamName(battle.attackTeamId)} vs ${getTeamName(battle.defenseTeamId)}</div>
+                    <div class="text-xs text-gray-500 mb-2">Resultado: ${battle.result} | Data: ${battle.date}</div>
+                    <div class="flex space-x-2">
+                        <button onclick="editBattle(${battle.id})" class="text-blue-600 text-xs">Editar</button>
+                        <button onclick="deleteBattle(${battle.id})" class="text-red-600 text-xs">Remover</button>
+                    </div>
+                `;
+                battleList.appendChild(li);
+            });
+        }
+
+        function editBattle(id) {
+            alert('Editar batalha: ' + id);
+        }
+
+        function deleteBattle(id) {
+            if (confirm('Deseja remover esta batalha?')) {
+                battles = battles.filter(b => b.id !== id);
+                renderBattles();
+            }
+        }
+
+        renderTeams();
+        renderBattles();
+    </script>
+</body>
+</html>
