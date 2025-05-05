@@ -1,68 +1,110 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 export default function RegistroPage() {
-  const [teams, setTeams] = useState([
-    { id: 1, name: 'Fora do Tempo' },
-    { id: 2, name: 'Tropa Alfa' },
-    { id: 3, name: 'Os Invencíveis' },
-    { id: 4, name: 'Tempestade' }
-  ]);
+  const [teams, setTeams] = useState([]);
+  const [battles, setBattles] = useState([]);
+  const [currentTab, setCurrentTab] = useState("battles");
+  const [showBattleModal, setShowBattleModal] = useState(false);
+  const [showTeamModal, setShowTeamModal] = useState(false);
 
-  const [battles, setBattles] = useState([
-    { id: 1, attackTeamId: 1, attackPower: 3350, defenseTeamId: 2, defensePower: 4123, result: 'Perdeu', date: '2023-05-15' },
-    { id: 2, attackTeamId: 3, attackPower: 4500, defenseTeamId: 4, defensePower: 3800, result: 'Venceu', date: '2023-05-20' },
-    { id: 3, attackTeamId: 2, attackPower: 5000, defenseTeamId: 1, defensePower: 4800, result: 'Venceu', date: '2023-06-01' }
-  ]);
+  // Inicializa times e batalhas simuladas
+  useEffect(() => {
+    setTeams([
+      { id: 1, name: "Fora do Tempo", color: "blue" },
+      { id: 2, name: "Tropa Alfa", color: "red" },
+    ]);
+    setBattles([
+      { id: 1, winnerId: 1, winnerPower: 3350, loserId: 2, loserPower: 4123, date: "2023-05-15" },
+    ]);
+  }, []);
 
-  const getTeamName = (id) => {
-    const team = teams.find(t => t.id === id);
-    return team ? team.name : 'Desconhecido';
-  };
-
-  const deleteBattle = (id) => {
-    if (confirm('Deseja remover esta batalha?')) {
-      setBattles(prev => prev.filter(b => b.id !== id));
-    }
-  };
-
-  const editBattle = (id) => {
-    alert('Editar batalha: ' + id);
-  };
+  const getTeamName = (id) => teams.find((t) => t.id === id)?.name || "-";
 
   return (
-    <div className="bg-gray-100 min-h-screen font-sans">
-      <div className="container mx-auto px-4 py-8 max-w-md">
-        <header className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Registro de Batalhas</h1>
-        </header>
+    <>
+      <Head>
+        <title>Registro de Batalhas</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+      </Head>
+      <div className="min-h-screen bg-gray-100 p-4 max-w-xl mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-4">Registro de Batalhas</h1>
 
-        <main>
-          <h2 className="text-xl font-semibold mb-4">Times</h2>
-          <ul className="mb-8 space-y-2">
-            {teams.map(team => (
-              <li key={team.id} className="bg-white shadow rounded px-4 py-2">
-                {team.name}
-              </li>
-            ))}
-          </ul>
+        <div className="flex justify-center gap-4 mb-6">
+          <button
+            className={`px-4 py-2 rounded ${currentTab === "battles" ? "bg-blue-600 text-white" : "bg-white"}`}
+            onClick={() => setCurrentTab("battles")}
+          >
+            Batalhas
+          </button>
+          <button
+            className={`px-4 py-2 rounded ${currentTab === "teams" ? "bg-blue-600 text-white" : "bg-white"}`}
+            onClick={() => setCurrentTab("teams")}
+          >
+            Times
+          </button>
+        </div>
 
-          <h2 className="text-xl font-semibold mb-4">Histórico de Batalhas</h2>
-          <ul className="space-y-4">
-            {battles.map(battle => (
-              <li key={battle.id} className="bg-white shadow rounded p-4">
-                <div className="text-sm mb-2">{getTeamName(battle.attackTeamId)} vs {getTeamName(battle.defenseTeamId)}</div>
-                <div className="text-xs text-gray-500 mb-2">Resultado: {battle.result} | Data: {battle.date}</div>
-                <div className="flex space-x-2">
-                  <button onClick={() => editBattle(battle.id)} className="text-blue-600 text-xs">Editar</button>
-                  <button onClick={() => deleteBattle(battle.id)} className="text-red-600 text-xs">Remover</button>
-                </div>
-              </li>
+        {currentTab === "battles" && (
+          <div>
+            <button
+              className="w-full mb-4 bg-blue-600 text-white py-2 rounded"
+              onClick={() => setShowBattleModal(true)}
+            >
+              Registrar Nova Batalha
+            </button>
+            {battles.map((battle) => (
+              <div key={battle.id} className="bg-white p-4 mb-2 rounded shadow">
+                <p>
+                  <strong>Vencedor:</strong> {getTeamName(battle.winnerId)} ({battle.winnerPower})
+                </p>
+                <p>
+                  <strong>Perdedor:</strong> {getTeamName(battle.loserId)} ({battle.loserPower})
+                </p>
+                <p className="text-sm text-gray-500">{battle.date}</p>
+              </div>
             ))}
-          </ul>
-        </main>
+          </div>
+        )}
+
+        {currentTab === "teams" && (
+          <div>
+            <button
+              className="w-full mb-4 bg-green-600 text-white py-2 rounded"
+              onClick={() => setShowTeamModal(true)}
+            >
+              Adicionar Novo Time
+            </button>
+            {teams.map((team) => (
+              <div key={team.id} className="bg-white p-4 mb-2 rounded shadow">
+                <p className="font-bold text-lg text-{team.color}-600">{team.name}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {showBattleModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded w-96">
+              <h2 className="text-xl font-bold mb-4">Nova Batalha</h2>
+              <p className="text-sm">(Formulário a implementar)</p>
+              <button className="mt-4 text-blue-600" onClick={() => setShowBattleModal(false)}>Fechar</button>
+            </div>
+          </div>
+        )}
+
+        {showTeamModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded w-96">
+              <h2 className="text-xl font-bold mb-4">Novo Time</h2>
+              <p className="text-sm">(Formulário a implementar)</p>
+              <button className="mt-4 text-blue-600" onClick={() => setShowTeamModal(false)}>Fechar</button>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 }
